@@ -37,7 +37,7 @@
 			</h3>
 
 			<div class="w3-row-padding">
-				<div class="w3-col" id="listAll">
+				<div class="w3-col" id="incidentList">
 					<table class='display table table-striped table-bordered'
 						cellspacing='0' width='100%'>
 						<thead>
@@ -89,7 +89,7 @@
 			</h3>
 
 			<div class="w3-row-padding">
-				<div class="w3-col" id="listAll">
+				<div class="w3-col" id="btList">
 					<table class='display table table-striped table-bordered'
 						cellspacing='0' width='100%'>
 						<thead>
@@ -109,6 +109,62 @@
 									<td><c:out value="${bluetooth.name}" /></td>
 									<td><c:out value="${bluetooth.type}" /></td>
 									<td><c:out value="${bluetooth.address}" /></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<!-- List of WiFis -->
+
+		<div class="w3-container w3-padding-32" id="users">
+			<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">
+				WiFi List for
+				<c:out value="${uName} " />
+			</h3>
+
+			<div class="w3-row-padding">
+				<div class="w3-col" id="wifiList">
+					<table class='display table table-striped table-bordered'
+						cellspacing='0' width='100%'>
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>SSID</th>
+								<th>BSSID</th>
+								<th>Level</th>
+								<th>Frequency</th>
+								<th>Center Freq 0</th>
+								<th>Center Freq 1</th>
+								<th>Capabilities</th>
+								<th>Channel Width</th>
+								<th>Channel Width 20</th>
+								<th>Channel Width 40</th>
+								<th>Channel Width 80</th>
+								<th>Channel Width 160</th>
+								<th>Channel Width 80+</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${wifis}" var="wifi">
+								<tr>
+									<td><c:out value="${wifi.id}" /></td>
+									<td><c:out value="${wifi.ssid}" /></td>
+									<td><c:out value="${wifi.bssid}" /></td>
+									<td><c:out value="${wifi.level}" /></td>
+									<td><c:out value="${wifi.frequency}" /></td>
+									<td><c:out value="${wifi.centerFreq0}" /></td>
+									<td><c:out value="${wifi.centerFreq1}" /></td>
+									<td><c:out value="${wifi.capabilities}" /></td>
+									<td><c:out value="${wifi.channelWidth}" /></td>
+									<td><c:out value="${wifi.channelWidth20}" /></td>
+									<td><c:out value="${wifi.channelWidth40}" /></td>
+									<td><c:out value="${wifi.channelWidth80}" /></td>
+									<td><c:out value="${wifi.channelWidth160}" /></td>
+									<td><c:out value="${wifi.channelWidth80Plus}" /></td>
+
 								</tr>
 							</c:forEach>
 						</tbody>

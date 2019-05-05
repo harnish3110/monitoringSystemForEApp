@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.master.project.task.beans.Bluetooth;
 import com.master.project.task.beans.Incidents;
+import com.master.project.task.beans.WiFi;
 import com.master.project.task.util.DBConnection;
 
 /**
@@ -64,8 +65,13 @@ public class UserDetails extends HttpServlet {
 			request.getSession().setAttribute("tottalIncidents", totalIncidents + "");
 			request.getSession().setAttribute("incidentsRecieved", incidentsRecieved);
 			request.getSession().setAttribute("uName", userName);
+			// List Blue tooth
 			request.getSession().setAttribute("bluetooths",
 					listBluetooth("select * from bluetooth where UserId = " + userId));
+
+			// List WiFi
+			request.getSession().setAttribute("wifis",
+					listWifiConnections("select * from wifi where UserId = " + userId));
 
 			request.getRequestDispatcher("/userDetails.jsp").forward(request, response);
 
@@ -97,7 +103,7 @@ public class UserDetails extends HttpServlet {
 	public List<Bluetooth> listBluetooth(String sql) {
 		List<Bluetooth> bluetooths = new ArrayList<Bluetooth>();
 		try {
-			// checking of connection availble 
+			// checking of connection availble
 			ResultSet rS = connection.createStatement().executeQuery(sql);
 			while (rS.next()) {
 				Bluetooth bluetooth = new Bluetooth();
@@ -115,8 +121,44 @@ public class UserDetails extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			return null;
 		}
 		return bluetooths;
+	}
+
+	public List<WiFi> listWifiConnections(String sql) {
+		List<WiFi> wiFis = new ArrayList<WiFi>();
+		try {
+			ResultSet rS = connection.createStatement().executeQuery(sql);
+			while (rS.next()) {
+				WiFi wifi = new WiFi();
+				wifi.setId(rS.getInt(1));
+				wifi.setUserId(rS.getInt(2));
+				wifi.setChannelWidth(rS.getInt(3));
+				wifi.setSsid(rS.getString(4));
+				wifi.setBssid(rS.getString(5));
+				wifi.setLevel(rS.getInt(6));
+				wifi.setFrequency(rS.getInt(7));
+				wifi.setCenterFreq0(rS.getInt(8));
+				wifi.setCenterFreq1(rS.getInt(9));
+				wifi.setCapabilities(rS.getString(10));
+				wifi.setChannelWidth20(rS.getInt(11));
+				wifi.setChannelWidth40(rS.getInt(12));
+				wifi.setChannelWidth80(rS.getInt(13));
+				wifi.setChannelWidth160(rS.getInt(14));
+				wifi.setChannelWidth80Plus(rS.getInt(15));
+
+				wiFis.add(wifi);
+
+			}
+			rS.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return null;
+		}
+		return wiFis;
 	}
 
 }

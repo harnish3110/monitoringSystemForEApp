@@ -44,22 +44,23 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 		try {
 			email = request.getParameter("email");
-			System.out.println(email);
+			// System.out.println(email);
 			password = EncryptPassword.encryption(request.getParameter("password"));
-			System.out.println("password" + password);
+			// System.out.println("password" + password);
 			connection = DBConnection.createConnection();
 			statement = connection.createStatement();
 			String sql = "select * from login where(email='" + email + "' AND password ='" + password + "')";
 			rSet = statement.executeQuery(sql);
 			if (rSet.next()) {
+				System.out.println("Login Successful");
 				request.getSession().setAttribute("firstName", rSet.getString("first_name"));
-				
+
 				request.getSession().setAttribute("allUsers",
 						RetrieveData.listAllUsers("select * from user order by LastUpdated DESC"));
-				
+
 				request.getSession().setAttribute("Incidents",
 						ListAllIncident.listAllIncidents("select * from incident"));
-				
+
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			} else {
 				request.setAttribute("msg", "Invalid Credentials");
