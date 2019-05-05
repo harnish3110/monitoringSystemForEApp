@@ -6,6 +6,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User Details</title>
+<style type="text/css">
+#map {
+	height: 425px;
+	width:80%;
+}
+</style>
 </head>
 <body>
 	<%
@@ -82,6 +88,18 @@
 				<canvas id="pie-chart" class="chartjs" width="900" height="300"></canvas>
 			</div>
 		</div>
+
+		<div class="w3-container w3-padding-32" id="users">
+			<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">
+				Location history</h3>
+
+			<div class="w3-row-padding">
+				<div id="map"></div>
+			</div>
+		</div>
+
+
+
 		<div class="w3-container w3-padding-32" id="users">
 			<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">
 				Bluetooth List for
@@ -201,6 +219,38 @@
 				}
 			});
 		});
+
+		//Google Maps API
+		var map;
+		var latitude = '${uLat}';
+		var longitude = '${uLng}';
+		var loc = '${locations}';
+
+		function initMap() {
+			map = new google.maps.Map(document.getElementById('map'), {
+				center : {
+					lat : Number(latitude),
+					lng : Number(longitude)
+				},
+				zoom : 10
+			});
+			var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+			var markers = locations.map(function(location, i) {
+				return new google.maps.Marker({
+					position : location,
+					label : labels[i % labels.length]
+				});
+			});
+
+			var markerCluster = new MarkerClusterer(
+					map,
+					markers,
+					{
+						imagePath : 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+					});
+		}
+		var locations = JSON.parse(loc);
 	</script>
 
 </body>

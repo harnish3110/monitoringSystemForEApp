@@ -126,7 +126,7 @@
 				<tbody>
 					<c:forEach items="${Incidents}" var="incident">
 						<tr>
-							<td id="incidentId" name="incidentId"><c:out
+							<td id="incidentId"><c:out
 									value="${incident.incidentId}" /></td>
 							<td><c:out value="${incident.description}" /></td>
 							<td><c:out value="${incident.timeOfEvent}" /></td>
@@ -172,6 +172,7 @@
 			element.classList.remove("form-inline");
 
 			//Social Graph
+			//http://visjs.org/docs/network/index.htm
 			var nodes = new vis.DataSet(socialGraphData.nodes);
 			var edges = new vis.DataSet(socialGraphData.edges);
 

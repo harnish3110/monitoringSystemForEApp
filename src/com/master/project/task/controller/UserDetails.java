@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import com.master.project.task.beans.Bluetooth;
 import com.master.project.task.beans.Incidents;
 import com.master.project.task.beans.WiFi;
@@ -62,8 +65,11 @@ public class UserDetails extends HttpServlet {
 			int incidentsRecievedCount = rSet.getInt(1);
 
 			request.getSession().setAttribute("incidentsRecCount", incidentsRecievedCount + "");
+			
 			request.getSession().setAttribute("tottalIncidents", totalIncidents + "");
+			
 			request.getSession().setAttribute("incidentsRecieved", incidentsRecieved);
+			//Set User Name
 			request.getSession().setAttribute("uName", userName);
 			// List Blue tooth
 			request.getSession().setAttribute("bluetooths",
@@ -72,6 +78,13 @@ public class UserDetails extends HttpServlet {
 			// List WiFi
 			request.getSession().setAttribute("wifis",
 					listWifiConnections("select * from wifi where UserId = " + userId));
+
+			// Location history
+			JSONArray locations = getLocationHistory("select * from location where UserId = " + userId);
+			request.getSession().setAttribute("uLat", (Double)locations.getJSONObject(1).get("lat"));
+			request.getSession().setAttribute("uLng", (Double)locations.getJSONObject(1).get("lng"));
+
+			request.getSession().setAttribute("locations", locations);
 
 			request.getRequestDispatcher("/userDetails.jsp").forward(request, response);
 
@@ -159,6 +172,25 @@ public class UserDetails extends HttpServlet {
 			return null;
 		}
 		return wiFis;
+	}
+
+	public JSONArray getLocationHistory(String sql) {
+		JSONArray locations = new JSONArray();
+		ResultSet rS = null;
+		try {
+			rS = connection.createStatement().executeQuery(sql);
+			while (rS.next()) {
+				locations.put(new JSONObject().put("lat", rS.getDouble(5)).put("lng", rS.getDouble(3)));
+			}
+			
+			rS.close();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
+		return locations;
 	}
 
 }
