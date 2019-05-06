@@ -21,7 +21,7 @@
 				Monitoring</a>
 			<!-- Float links to the right. Hide them on small screens -->
 			<div class="w3-right w3-hide-small">
-				<a href="./index.jsp" class="w3-bar-item w3-button">Home</a> <a
+				<a href="./home.jsp" class="w3-bar-item w3-button">Home</a> <a
 					href="Logout" class="w3-bar-item w3-button">Logout</a>
 			</div>
 		</div>

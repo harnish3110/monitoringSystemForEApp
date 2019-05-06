@@ -61,7 +61,7 @@ public class Login extends HttpServlet {
 				request.getSession().setAttribute("Incidents",
 						ListAllIncident.listAllIncidents("select * from incident"));
 
-				request.getRequestDispatcher("/index.jsp").forward(request, response);
+				request.getRequestDispatcher("/home.jsp").forward(request, response);
 			} else {
 				request.setAttribute("msg", "Invalid Credentials");
 				System.out.println("invalid");

@@ -27,7 +27,7 @@
 				Monitoring</a>
 			<!-- Float links to the right. Hide them on small screens -->
 			<div class="w3-right w3-hide-small">
-				<a href="./index.jsp" class="w3-bar-item w3-button">Home</a> <a
+				<a href="./home.jsp" class="w3-bar-item w3-button">Home</a> <a
 					href="Logout" class="w3-bar-item w3-button">Logout</a>
 			</div>
 		</div>
@@ -88,13 +88,13 @@
 
 				<h5 class="w3-border-bottom w3-border-light-grey w3-padding-16">
 					Total amount of data download
-					<bold><c:out value="${dataDown}"></c:out>
-					Bytes</bold>
+					<bold>
+					<c:out value="${dataDown}"></c:out> Bytes</bold>
 				</h5>
 				<h5 class="w3-border-bottom w3-border-light-grey w3-padding-16">
 					Total amount of data Uploaded
-					<bold><c:out value="${dataUpl}"></c:out>
-					Bytes</bold>
+					<bold>
+					<c:out value="${dataUpl}"></c:out> Bytes</bold>
 				</h5>
 				<canvas id="pie-chart" class="chartjs" width="900" height="300"></canvas>
 			</div>

@@ -102,8 +102,8 @@ public class UserDetails extends HttpServlet {
 
 			// Location history
 			JSONArray locations = getLocationHistory("select * from location where UserId = " + userId);
-			request.getSession().setAttribute("uLat", (Double) locations.getJSONObject(1).get("lat"));
-			request.getSession().setAttribute("uLng", (Double) locations.getJSONObject(1).get("lng"));
+			request.getSession().setAttribute("uLat", (Double) locations.getJSONObject(0).get("lat"));
+			request.getSession().setAttribute("uLng", (Double) locations.getJSONObject(0).get("lng"));
 			request.getSession().setAttribute("locations", locations);
 
 			// Forwarding to user details page
@@ -135,19 +135,23 @@ public class UserDetails extends HttpServlet {
 	}
 
 	public List<Bluetooth> listBluetooth(String sql) {
-		List<Bluetooth> bluetooths = new ArrayList<Bluetooth>();
+		List<Bluetooth> bluetooths = null;
 		try {
 			// checking of connection availble
 			ResultSet rS = connection.createStatement().executeQuery(sql);
-			while (rS.next()) {
-				Bluetooth bluetooth = new Bluetooth();
-				bluetooth.setBlutoothId(rS.getInt(1));
-				bluetooth.setUserId(rS.getInt(2));
-				bluetooth.setName(rS.getString(3));
-				bluetooth.setAddress(rS.getString(5));
-				bluetooth.setType(rS.getInt(4));
+			if (rS.next()) {
+				bluetooths = new ArrayList<Bluetooth>();
+				do {
 
-				bluetooths.add(bluetooth);
+					Bluetooth bluetooth = new Bluetooth();
+					bluetooth.setBlutoothId(rS.getInt(1));
+					bluetooth.setUserId(rS.getInt(2));
+					bluetooth.setName(rS.getString(3));
+					bluetooth.setAddress(rS.getString(5));
+					bluetooth.setType(rS.getInt(4));
+
+					bluetooths.add(bluetooth);
+				} while (rS.next());
 			}
 
 			rS.close();
@@ -164,25 +168,28 @@ public class UserDetails extends HttpServlet {
 		List<WiFi> wiFis = new ArrayList<WiFi>();
 		try {
 			ResultSet rS = connection.createStatement().executeQuery(sql);
-			while (rS.next()) {
-				WiFi wifi = new WiFi();
-				wifi.setId(rS.getInt(1));
-				wifi.setUserId(rS.getInt(2));
-				wifi.setChannelWidth(rS.getInt(3));
-				wifi.setSsid(rS.getString(4));
-				wifi.setBssid(rS.getString(5));
-				wifi.setLevel(rS.getInt(6));
-				wifi.setFrequency(rS.getInt(7));
-				wifi.setCenterFreq0(rS.getInt(8));
-				wifi.setCenterFreq1(rS.getInt(9));
-				wifi.setCapabilities(rS.getString(10));
-				wifi.setChannelWidth20(rS.getInt(11));
-				wifi.setChannelWidth40(rS.getInt(12));
-				wifi.setChannelWidth80(rS.getInt(13));
-				wifi.setChannelWidth160(rS.getInt(14));
-				wifi.setChannelWidth80Plus(rS.getInt(15));
+			if (rS.next()) {
+				do {
 
-				wiFis.add(wifi);
+					WiFi wifi = new WiFi();
+					wifi.setId(rS.getInt(1));
+					wifi.setUserId(rS.getInt(2));
+					wifi.setChannelWidth(rS.getInt(3));
+					wifi.setSsid(rS.getString(4));
+					wifi.setBssid(rS.getString(5));
+					wifi.setLevel(rS.getInt(6));
+					wifi.setFrequency(rS.getInt(7));
+					wifi.setCenterFreq0(rS.getInt(8));
+					wifi.setCenterFreq1(rS.getInt(9));
+					wifi.setCapabilities(rS.getString(10));
+					wifi.setChannelWidth20(rS.getInt(11));
+					wifi.setChannelWidth40(rS.getInt(12));
+					wifi.setChannelWidth80(rS.getInt(13));
+					wifi.setChannelWidth160(rS.getInt(14));
+					wifi.setChannelWidth80Plus(rS.getInt(15));
+
+					wiFis.add(wifi);
+				} while (rS.next());
 
 			}
 			rS.close();
@@ -200,8 +207,13 @@ public class UserDetails extends HttpServlet {
 		ResultSet rS = null;
 		try {
 			rS = connection.createStatement().executeQuery(sql);
-			while (rS.next()) {
-				locations.put(new JSONObject().put("lat", rS.getDouble(5)).put("lng", rS.getDouble(3)));
+			if (rS.next()) {
+				do {
+					locations.put(new JSONObject().put("lat", rS.getDouble(5)).put("lng", rS.getDouble(3)));
+				} while (rS.next());
+
+			} else {
+				locations.put(new JSONObject().put("lat", 39.984702).put("lng", 116.318417));
 			}
 
 			rS.close();
@@ -209,6 +221,7 @@ public class UserDetails extends HttpServlet {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
+			locations.put(new JSONObject().put("lat", 39.984702).put("lng", 116.318417));
 		}
 
 		return locations;

@@ -29,15 +29,15 @@
 	width: 600px;
 	height: 400px;
 	border-style: inset;
-    margin-left: 30%;
-    border-width: medium;
-    border-color: cadetblue;
+	margin-left: 30%;
+	border-width: medium;
+	border-color: cadetblue;
 }
 </style>
 
 
 </head>
-<body>
+<body onload="loadOnce()">
 	<%
 		if (session.getAttribute("firstName") == null) {
 			response.sendRedirect("login.jsp");
@@ -61,7 +61,8 @@
 
 	<!-- Users content -->
 	<div class="w3-content w3-padding" style="max-width: 1564px">
-	<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Social Interaction for Users</h3>
+		<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Social
+			Interaction for Users</h3>
 		<div id="socialnetwork" class="d-flex justify-content-center"></div>
 
 		<!-- Project Section -->
@@ -127,8 +128,7 @@
 				<tbody>
 					<c:forEach items="${Incidents}" var="incident">
 						<tr>
-							<td id="incidentId"><c:out
-									value="${incident.incidentId}" /></td>
+							<td id="incidentId"><c:out value="${incident.incidentId}" /></td>
 							<td><c:out value="${incident.description}" /></td>
 							<td><c:out value="${incident.timeOfEvent}" /></td>
 							<td><c:out value="${incident.incidentType}" /></td>
@@ -254,7 +254,9 @@
 			// initialize your network!
 			var network = new vis.Network(container, data, options);
 		});
-		
+		function loadOnce() {
+			//window.location.reload();
+		}
 	</script>
 
 </body>

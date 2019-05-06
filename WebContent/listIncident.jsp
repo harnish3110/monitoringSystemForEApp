@@ -24,7 +24,7 @@
 				<br/> <a href="Logout">Logout</a>
 					</div>
 				<br/>
-				<br> <a href="index.jsp">Home</a>
+				<br> <a href="home.jsp">Home</a>
 			<div id='incidentList'></div>
 		</div>
 	</div>
