@@ -54,23 +54,44 @@ public class UserDetails extends HttpServlet {
 					+ userId + ")";
 			List<Incidents> incidentsRecieved = ListAllIncident.listAllIncidents(sql);
 
+			// Total Number of Incidents
 			rSet = statement.executeQuery("select count(incident.IncidentId) as totalcount from incident");
 			rSet.next();
 			int totalIncidents = rSet.getInt(1);
 
+			// Total number of Incidents Recieved
 			rSet = statement.executeQuery(
 					"select count(incidentexchange.ID) as incidentRecieved from incidentexchange where incidentexchange.To = "
 							+ userId);
 			rSet.next();
 			int incidentsRecievedCount = rSet.getInt(1);
 
+			// Total amount of data uploaded
+			rSet = statement.executeQuery(
+					"select sum(i.IncidentSize) as uploaded from incident as i inner join incidentexchange as ie on ie.IncidentId = i.IncidentId where ie.From != ie.To and ie.From ="
+							+ userId);
+			int dataUploaded = 0;
+			if (rSet.next())
+				dataUploaded = rSet.getInt(1);
+
+			// Total amount of data download
+			rSet = statement.executeQuery(
+					"select sum(IncidentSize) as downloaded from incident where IncidentId in (select IncidentId from incidentexchange as ie where ie.To = "
+							+ userId + ")");
+			int dataDownloaded = 0;
+			if (rSet.next())
+				dataDownloaded = rSet.getInt(1);
+
+			// Setting the required attributes on session
 			request.getSession().setAttribute("incidentsRecCount", incidentsRecievedCount + "");
-			
 			request.getSession().setAttribute("tottalIncidents", totalIncidents + "");
-			
 			request.getSession().setAttribute("incidentsRecieved", incidentsRecieved);
-			//Set User Name
+			request.getSession().setAttribute("dataDown", dataDownloaded);
+			request.getSession().setAttribute("dataUpl", dataUploaded);
+
+			// Set User Name
 			request.getSession().setAttribute("uName", userName);
+
 			// List Blue tooth
 			request.getSession().setAttribute("bluetooths",
 					listBluetooth("select * from bluetooth where UserId = " + userId));
@@ -81,11 +102,11 @@ public class UserDetails extends HttpServlet {
 
 			// Location history
 			JSONArray locations = getLocationHistory("select * from location where UserId = " + userId);
-			request.getSession().setAttribute("uLat", (Double)locations.getJSONObject(1).get("lat"));
-			request.getSession().setAttribute("uLng", (Double)locations.getJSONObject(1).get("lng"));
-
+			request.getSession().setAttribute("uLat", (Double) locations.getJSONObject(1).get("lat"));
+			request.getSession().setAttribute("uLng", (Double) locations.getJSONObject(1).get("lng"));
 			request.getSession().setAttribute("locations", locations);
 
+			// Forwarding to user details page
 			request.getRequestDispatcher("/userDetails.jsp").forward(request, response);
 
 		} catch (Exception e) {
@@ -182,7 +203,7 @@ public class UserDetails extends HttpServlet {
 			while (rS.next()) {
 				locations.put(new JSONObject().put("lat", rS.getDouble(5)).put("lng", rS.getDouble(3)));
 			}
-			
+
 			rS.close();
 
 		} catch (Exception e) {

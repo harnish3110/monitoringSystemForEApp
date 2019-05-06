@@ -4,6 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<!-- Google API MarkerCluster -->
+<script
+	src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+	
+</script>
 <style type="text/css">
 .developer {
 	font-size: smaller;
@@ -49,12 +54,6 @@
 	<!-- VIS JS for Social Graph -->
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
-
-	<!-- Google API MarkerCluster -->
-	<script
-		src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-		
-	</script>
 
 	<!-- Google Maps API -->
 	<script

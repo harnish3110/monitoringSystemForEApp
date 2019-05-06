@@ -61,6 +61,7 @@
 
 	<!-- Users content -->
 	<div class="w3-content w3-padding" style="max-width: 1564px">
+	<h3 class="w3-border-bottom w3-border-light-grey w3-padding-16">Social Interaction for Users</h3>
 		<div id="socialnetwork" class="d-flex justify-content-center"></div>
 
 		<!-- Project Section -->
@@ -253,6 +254,7 @@
 			// initialize your network!
 			var network = new vis.Network(container, data, options);
 		});
+		
 	</script>
 
 </body>

@@ -9,7 +9,7 @@
 <style type="text/css">
 #map {
 	height: 425px;
-	width:80%;
+	width: 80%;
 }
 </style>
 </head>
@@ -84,7 +84,18 @@
 			<div class="w3-container">
 				<!-- <img src="/w3images/map.jpg" class="w3-image" style="width: 100%"> -->
 				<h1 class="w3-border-bottom w3-border-light-grey w3-padding-16">
-					Pie Chart</h1>
+					Statistics</h1>
+
+				<h5 class="w3-border-bottom w3-border-light-grey w3-padding-16">
+					Total amount of data download
+					<bold><c:out value="${dataDown}"></c:out>
+					Bytes</bold>
+				</h5>
+				<h5 class="w3-border-bottom w3-border-light-grey w3-padding-16">
+					Total amount of data Uploaded
+					<bold><c:out value="${dataUpl}"></c:out>
+					Bytes</bold>
+				</h5>
 				<canvas id="pie-chart" class="chartjs" width="900" height="300"></canvas>
 			</div>
 		</div>
