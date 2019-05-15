@@ -7,7 +7,7 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 public class DBConnection {
 	private static final String SERVER = "localhost";
 	private static final int PORT = 3306;
-	private static final String DB = "master_proje";
+	private static final String DB = "master_project";
 	private static final String USER = "root";
 	private static final String PASSWORD = "Admin123";
 

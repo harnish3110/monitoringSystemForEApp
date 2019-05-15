@@ -9,6 +9,16 @@
 	src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
 	
 </script>
+<script type="text/javascript">
+var api = 'AIzaSyAnDtmx8prFxAS1gvSai7RXsk5wt6x16A0';
+
+var apiUrl = 'https://maps.googleapis.com/maps/api/js?key='+api+'&callback=initMap&libraries=visualization';
+var JSElement = document.createElement('script');
+    JSElement.src = apiUrl;
+    //JSElement.onload = OnceLoaded;
+    document.getElementsByTagName('head')[0].appendChild(JSElement);
+
+</script>
 <style type="text/css">
 .developer {
 	font-size: smaller;
@@ -55,9 +65,12 @@
 	<script type="text/javascript"
 		src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
 
-	<!-- Google Maps API -->
+	<!-- Google Maps API 
+	
 	<script
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnDtmx8prFxAS1gvSai7RXsk5wt6x16A0&callback=initMap&libraries=visualization"
 		async defer></script>
+		
+		-->
 </body>
 </html>

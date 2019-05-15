@@ -31,7 +31,7 @@ CREATE TABLE `bluetooth` (
   PRIMARY KEY (`BluetoothId`),
   KEY `FK_BluetoothUser` (`UserId`),
   CONSTRAINT `FK_BluetoothUser` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +52,7 @@ CREATE TABLE `incident` (
   `SourceId` varchar(50) DEFAULT NULL,
   `IncidentSize` double NOT NULL,
   PRIMARY KEY (`IncidentId`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -76,7 +76,7 @@ CREATE TABLE `incidentexchange` (
   CONSTRAINT `FK_IncidentId` FOREIGN KEY (`IncidentId`) REFERENCES `incident` (`IncidentId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_User_From` FOREIGN KEY (`From`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_User_To` FOREIGN KEY (`To`) REFERENCES `user` (`UserId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=221 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `location` (
   PRIMARY KEY (`LocationId`),
   KEY `FK_LocationUser` (`UserId`),
   CONSTRAINT `FK_LocationUser` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +136,7 @@ CREATE TABLE `login` (
   `password` varchar(45) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 INSERT INTO `login` VALUES ('Harnish','Shah','admin','21232f297a57a5a743894a0e4a801fc3',1);
@@ -181,7 +181,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `User` (`UserEmail`),
   KEY `FK_UserUserType_idx` (`UserTypeId`),
   CONSTRAINT `FK_UserUserType` FOREIGN KEY (`UserTypeId`) REFERENCES `usertype` (`UserTypeId`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -195,7 +195,7 @@ CREATE TABLE `usertype` (
   `UserTypeId` int(11) NOT NULL AUTO_INCREMENT,
   `UserType` varchar(20) NOT NULL,
   PRIMARY KEY (`UserTypeId`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 INSERT INTO `master_project`.`usertype` (`UserType`) VALUES ('Type 1');
 INSERT INTO `master_project`.`usertype` (`UserType`) VALUES ('Type 2');
@@ -230,7 +230,7 @@ CREATE TABLE `wifi` (
   PRIMARY KEY (`WifiId`),
   KEY `FK_WifiUser` (`UserId`),
   CONSTRAINT `FK_WifiUser` FOREIGN KEY (`UserId`) REFERENCES `user` (`UserId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
