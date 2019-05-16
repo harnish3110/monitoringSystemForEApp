@@ -44,11 +44,11 @@
     2.	If it is a first time it may ask you to select a workspace, select one and continue.
     Workspace is a folder where all your codes and projects reside. You can have multiple workspace in a single system.
     3.	Go to file, Import, existing project.
-    4.	Select the project, it may ask you to set a runtime instance. Here you will specify the server you installed in point 2.1-2. Select the appropriate version and location where it exists.
-    5.	Once the import wizard is done, go to project and then clean and select the imported project. This will ensure all the libraries and installed and ready to use.
-    I used maven dependency which is a software dependency manager where all the supporting libraries when mention are downloaded and ready to use.
+    4.	Select the project, it may ask you to set a runtime instance. Here you will specify the server you installed in point 		2.1-2. Select the appropriate version and location where it exists.
+    5.	Once the import wizard is done, go to project and then clean and select the imported project. This will ensure all the 		libraries and installed and ready to use.
+    I used maven dependency which is a software dependency manager where all the supporting libraries when mention are 			downloaded and ready to use.
     6.	Once all the dependencies are downloaded select the project and click on run. 
-    If ask for which runtime environment select the Tomcat version you downloaded and the give the path where it is installed. Then continue.
+    If ask for which runtime environment select the Tomcat version you downloaded and the give the path where it is installed. 		Then continue.
     7.	Once the server boots up a new window should open with:
     url: localhost:8080/[project-name]/login.jsp
     8.	Enter the credentials:
